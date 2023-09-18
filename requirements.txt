@@ -1,0 +1,8 @@
+deepmultilingualpunctuation
+pydub
+tqdm
+vosk
+transformers
+pydub
+wave
+ffmpeg
