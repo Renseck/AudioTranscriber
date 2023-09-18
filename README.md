@@ -7,7 +7,7 @@ Purely because taking notes in long interviews is a painstaking process - why no
 ## Installation:
 
 Open an Anaconda prompt, cd to the AudioTranscriber folder and run "pip install -r requirements.txt" to make sure
-all important packages are installed. Optionally, you go to the Vosk's [official website](https://alphacephei.com/vosk/models) and download a specific model to improve your results. 
+all important packages are installed. Optionally, you may go to the Vosk's [official website](https://alphacephei.com/vosk/models) and download a specific model to improve your results. 
 
 E.g. for Dutch, the model named "vosk-model-nl-spraakherkenning-0.6" is used (and is actually **required** to make this script work, as of now). Simply place it in the local folder where the .py file is located.
 
