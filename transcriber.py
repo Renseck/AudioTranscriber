@@ -6,6 +6,7 @@ Created on Tue Sep  5 09:55:02 2023
 """
 import warnings
 warnings.simplefilter("ignore", UserWarning)
+import argparse
 import wave
 import json
 import sys
@@ -22,6 +23,23 @@ verbose = True
 SetLogLevel(-1)
 
 monoPath = "MonoAudio/"
+
+def parse_arguments():
+    """
+    Parses the command line arguments.
+
+    Returns
+    -------
+    LIST
+        .parse_args() output.
+
+    """
+    parser = argparse.ArgumentParser(description='Your script description here')
+    parser.add_argument('--lan', '--language', type=str, default='nl', choices=['nl', 'en'],
+                        help='Specify the input language (nl or en)')
+    parser.add_argument('input1', type=str, help='Input audio files')
+    parser.add_argument('input2', type=str, nargs = "?", default = None, help='Output text file')
+    return parser.parse_args()
 
 def hr_min_sec(secs):
     """
@@ -230,23 +248,28 @@ def delete_stragglers():
     
 
 def main():
+    args = parse_arguments()
+    language = args.lan
+    
     make_folders()
     
     results = ""
     textResults = []
 
     ##### Handle inputs #####
-    inFileName = sys.argv[1]
+    inFileName = args.input1
     inFileSplit = inFileName.split(".")
     
     if inFileSplit[-1] != "wav":
         inFileName = convert_to_wav(inFileName)
         converted = True
+        
+    num_inputs = len([arg for arg in [args.input1, args.input2] if arg is not None])
 
-    if len(sys.argv) == 2:
+    if num_inputs == 1:
         outfileText = inFileSplit[0] + "_transcript.txt"
-    elif len(sys.argv) == 3:
-        outfileText = sys.argv[2] 
+    elif num_inputs == 2:
+        outfileText = args.input2
         
     outfileSplit = outfileText.split(".")
     outfileResults = outfileSplit[0] + "_transcriptResults.json"
@@ -259,11 +282,15 @@ def main():
     wf = wave.open(os.path.join(monoPath, monoFileName))
     
     ##### Run model to recognise language #####
-    if "vosk-model-nl-spraakherkenning-0.6"  in os.listdir(os.getcwd()):
-        model = Model(model_path = "vosk-model-nl-spraakherkenning-0.6")
-    else:
-        print("Large Dutch model not found - using the default Dutch model. See README for more info")
-        model = Model(lang = "nl")
+    if language == "nl":
+        if "vosk-model-nl-spraakherkenning-0.6"  in os.listdir(os.getcwd()):
+            model = Model(model_path = "vosk-model-nl-spraakherkenning-0.6")
+        else:
+            print("Large Dutch model not found - using the default Dutch model. See README for more info")
+            model = Model(lang = language)
+    elif language == "en":
+        print("Language set to English.")
+        model = Model(lang = language)
     
     recognizer = KaldiRecognizer(model, wf.getframerate())
     recognizer.SetWords(True)
@@ -311,7 +338,12 @@ def main():
         
     textOutput = " ".join(textResults)
     print("[INFO] Loading punctuation model...")
-    punctModel = PunctuationModel(model = "oliverguhr/fullstop-dutch-punctuation-prediction")
+    # Credits to https://github.com/oliverguhr/deepmultilingualpunctuation
+    
+    if language == "nl":
+        punctModel = PunctuationModel(model = "oliverguhr/fullstop-dutch-punctuation-prediction")
+    elif language == "en":
+        punctModel = PunctuationModel(model = "oliverguhr/fullstop-punctuation-multilang-large")
     print("[INFO] Adding punctuation...")
     resultsPunctuated = capitalize_sentences(punctModel.restore_punctuation(textOutput))
     print("[INFO] Punctuation added.")
