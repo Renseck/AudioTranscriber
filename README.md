@@ -1,7 +1,7 @@
 ## Python command line audio transciber
 This script transcribes audio from recorded files (no live transcription as yet) to .txt files. It adds punctuation and convenient time markings in the file as well.
 
-##Motivation
+## Motivation
 Purely because taking notes in long interviews is a painstaking process - why not let the computer do it for you? There are online services to help you with this, but in the interest of protecting IP and identities, I wanted to create a fully offline program to do it.
 
 ## Installation:
