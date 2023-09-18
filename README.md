@@ -26,6 +26,7 @@ will not find the file you are referring to.
 
 ## Credits
 The pre-trained model to restore punctuation to the transcript was found at [here](https://github.com/oliverguhr/deepmultilingualpunctuation). This repo contains excellent instructions on how to use it further.
+
 Vosk was used for the audio-transcription, more info can be found on the [github](https://github.com/alphacep/vosk-api) or the [official website](https://alphacephei.com/vosk/)
 
 ## License
