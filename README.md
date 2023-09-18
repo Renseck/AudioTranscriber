@@ -25,8 +25,19 @@ The argument in the square brackets is optional; the program generates a name fo
 if this argument is left empty (recommended). It is important you included the ".extension", .e.g ".m4a", or the program
 will not find the file you are referring to.
 
-## Credits
+## Credits and References
 The pre-trained model to restore punctuation to the transcript was found at [here](https://github.com/oliverguhr/deepmultilingualpunctuation). This repo contains excellent instructions on how to use it further.
+<a id="1">[1]</a> 
+@article{guhr-EtAl:2021:fullstop,
+  title={FullStop: Multilingual Deep Models for Punctuation Prediction},
+  author    = {Guhr, Oliver  and  Schumann, Anne-Kathrin  and  Bahrmann, Frank  and  Böhme, Hans Joachim},
+  booktitle      = {Proceedings of the Swiss Text Analytics Conference 2021},
+  month          = {June},
+  year           = {2021},
+  address        = {Winterthur, Switzerland},
+  publisher      = {CEUR Workshop Proceedings},  
+  url       = {http://ceur-ws.org/Vol-2957/sepp_paper4.pdf}
+}
 
 Vosk was used for the audio-transcription, more info can be found on the [github](https://github.com/alphacep/vosk-api) or the [official website](https://alphacephei.com/vosk/)
 
