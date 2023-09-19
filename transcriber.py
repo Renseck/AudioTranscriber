@@ -36,8 +36,8 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description='Your script description here')
     parser.add_argument('--lan', '--language', type=str, default='nl', choices=['nl', 'en'],
                         help='Specify the input language (nl or en)')
-    parser.add_argument('input1', type=str, help='Input audio files')
-    parser.add_argument('input2', type=str, nargs="?", default=None, help='Output text file')
+    parser.add_argument('inputFile', type=str, help='Input audio files')
+    parser.add_argument('outputFile', type=str, nargs="?", default=None, help='Output text file')
     return parser.parse_args()
 
 
@@ -339,15 +339,15 @@ def main():
     language = args.lan
 
     ##### Handle inputs #####
-    inFileName = args.input1
+    inFileName = args.inputFile
     inFileSplit = inFileName.split(".")
 
-    num_inputs = len([arg for arg in [args.input1, args.input2] if arg is not None])
+    num_inputs = len([arg for arg in [args.inputFile, args.outputFile] if arg is not None])
 
     if num_inputs == 1:
         outfileText = inFileSplit[0] + "_transcript.txt"
     elif num_inputs == 2:
-        outfileText = args.input2
+        outfileText = args.outputFile
 
     textResults = transcribe(inFileName, language)
     textOutput = " ".join(textResults)
@@ -366,7 +366,7 @@ def main():
     resultsFormatted = insert_newlines(resultsPunctuated, 80)
 
     if verbose:
-        print_output = "[OUTPUT SAMPLE] " + resultsFormatted[:1000]
+        print_output = "\n[OUTPUT SAMPLE] " + resultsFormatted[:1000]
         if len(resultsFormatted) > 1000:
             print(print_output + "...")
         else:
