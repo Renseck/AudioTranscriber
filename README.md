@@ -31,8 +31,8 @@ python transcriber.py --lan en name_of_audio_file.extension name_of_transcipt_fi
 ```
 
 Supported languages:
-1. Dutch (default)
-2. English
+1. Dutch (nl) \[DEFAULT\]
+2. English (en)
 
 ## Credits and References
 The pre-trained model to restore punctuation to the transcript was found at [here](https://github.com/oliverguhr/deepmultilingualpunctuation). This repo contains excellent instructions on how to use it further.
