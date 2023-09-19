@@ -145,6 +145,7 @@ def transcribe(inputFile, language='nl'):
         List of all words transcribed.
 
     """
+    make_folders()
     results = ""
     textResults = []
     converted = False
@@ -336,8 +337,6 @@ def main():
     """
     args = parse_arguments()
     language = args.lan
-
-    make_folders()
 
     ##### Handle inputs #####
     inFileName = args.input1
