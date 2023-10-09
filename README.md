@@ -35,7 +35,7 @@ Supported languages:
 2. English (en)
 
 ## Troubleshooting
-- Some people are having issues with ffmpeg not being installed on their machine, and the program not being able to find it or an alternative. Simply fix this by installig ffmpeg (following one of the many guides available online, e.g. [this one](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/)).
+- Some people are having issues with ffmpeg not being installed on their machine, and the program not being able to find it or an alternative. Simply fix this by installing ffmpeg (following one of the many guides available online, e.g. [this one](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/)).
 
 ## Credits and References
 The pre-trained model to restore punctuation to the transcript was found at [here](https://github.com/oliverguhr/deepmultilingualpunctuation). This repo contains excellent instructions on how to use it further.
